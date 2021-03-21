@@ -1,5 +1,8 @@
 const express = require('express');
+const dotenv = require('dotenv');
 const menus = require('./data/menus');
+
+dotenv.config();
 
 const app = express();
 
@@ -16,4 +19,9 @@ app.get('/api/menus/:id', (req, res) => {
   res.json(menu);
 });
 
-app.listen(5000, console.log('Server running on port 5000'));
+const PORT = process.envPORT || 5000;
+
+app.listen(
+  PORT,
+  console.log(`Server running in ${process.env.NODE_ENV} monde on port ${PORT}`)
+);
