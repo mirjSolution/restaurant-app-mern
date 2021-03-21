@@ -13,7 +13,6 @@ const HomeScreen = () => {
       setMenus(data);
     };
     fetchMenus();
-    console.log(menus);
   }, []);
   return (
     <>

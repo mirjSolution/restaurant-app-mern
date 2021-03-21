@@ -15,7 +15,7 @@ const MenuScreen = ({ match }) => {
     };
 
     fetchMenu();
-  }, []);
+  }, [match]);
 
   return (
     <>
