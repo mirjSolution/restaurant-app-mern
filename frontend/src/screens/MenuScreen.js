@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
+import { Row, Col, Image, ListGroup, Button } from 'react-bootstrap';
 import Rating from '../components/Rating';
-import menus from '../menus';
+import axios from 'axios';
 
 const MenuScreen = ({ match }) => {
-  const menu = menus.find((menu) => menu._id === match.params.id);
+  const [menu, setMenu] = useState({});
+
+  useEffect(() => {
+    const fetchMenu = async () => {
+      const { data } = await axios.get(`/api/menus/${match.params.id}`);
+
+      setMenu(data);
+    };
+
+    fetchMenu();
+  }, []);
 
   return (
     <>

@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import axios from 'axios';
 
 import Menus from '../components/Menus';
-import menus from '../menus';
 
 const HomeScreen = () => {
+  const [menus, setMenus] = useState([]);
+
+  useEffect(() => {
+    const fetchMenus = async () => {
+      const { data } = await axios.get('/api/menus');
+      setMenus(data);
+    };
+    fetchMenus();
+    console.log(menus);
+  }, []);
   return (
     <>
       <h2 className='text-center'>Breakfast</h2>
