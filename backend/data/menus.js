@@ -70,4 +70,4 @@ const menus = [
   },
 ];
 
-module.exports = menus;
+export default menus;

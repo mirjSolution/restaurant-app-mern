@@ -1,6 +1,6 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const menus = require('./data/menus');
+import express from 'express';
+import dotenv from 'dotenv';
+import menus from './data/menus.js';
 
 dotenv.config();
 
