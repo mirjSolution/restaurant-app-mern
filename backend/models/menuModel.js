@@ -5,6 +5,11 @@ const reviewSchema = mongoose.Schema(
     name: { type: String, required: true },
     rating: { type: Number, required: true },
     comment: { type: String, required: true },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
   },
   {
     timestamps: true,
@@ -25,14 +30,13 @@ const menuSchema = mongoose.Schema(
     image: {
       type: String,
       required: true,
-      unique: true,
     },
     description: {
       type: String,
       required: true,
     },
     category: {
-      type: string,
+      type: String,
       required: true,
     },
     reviews: [reviewSchema],
@@ -62,6 +66,6 @@ const menuSchema = mongoose.Schema(
   }
 );
 
-const Menu = mongoose.mnodel('Menu', menuSchema);
+const Menu = mongoose.model('Menu', menuSchema);
 
-export default User;
+export default Menu;
