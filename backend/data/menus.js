@@ -38,7 +38,7 @@ const menus = [
     description:
       'Fusce a mi eget odio cursus bibendum. Aenean ac aliquet felis. Cras a augue vehicula, interdum ligula eu, vulputate lectus. Fusce a odio vel enim convallis pulvinar. Fusce ut scelerisque turpis, quis gravida augue. Pellentesque sed felis sit amet tellus lacinia fermentum. Etiam ut mauris sagittis, semper dui in, aliquam elit. ',
     category: 'Lunch',
-    price: 39.99,
+    price: 12.99,
     orderCount: 8,
     rating: 5,
     numReviews: 12,
@@ -49,7 +49,7 @@ const menus = [
     description:
       'Vivamus consequat sit amet ligula id bibendum. Donec sed purus at arcu laoreet dictum et nec odio. Proin venenatis feugiat metus eu euismod. Mauris sagittis fermentum elit, eu venenatis purus venenatis eget. Praesent scelerisque est velit. Phasellus luctus, diam quis convallis fringilla, nulla lacus feugiat enim.',
     category: 'Dinner',
-    price: 49.99,
+    price: 10.99,
     orderCount: 5,
     rating: 3.5,
     numReviews: 10,
@@ -61,7 +61,7 @@ const menus = [
       'Cras volutpat vulputate euismod. Vestibulum viverra malesuada augue, a laoreet tellus finibus non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit felis in rutrum faucibus. Phasellus tellus mi, ullamcorper id libero a, pharetra pharetra enim.',
     category: 'Dinner',
     orderCount: 6,
-    price: 29.99,
+    price: 11.99,
     rating: 4,
     numReviews: 12,
   },

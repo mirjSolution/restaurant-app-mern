@@ -8,7 +8,7 @@ import Loader from '../components/Loader';
 import { listMenuDetails } from '../actions/menuActions';
 
 const MenuScreen = ({ history, match }) => {
-  const [order, setOrder] = useState(0);
+  const [order, setOrder] = useState(1);
 
   const dispatch = useDispatch();
 
