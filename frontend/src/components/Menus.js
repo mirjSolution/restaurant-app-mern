@@ -1,19 +1,21 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 import Rating from './Rating';
 
 const Menus = ({ menus }) => {
   return (
     <Card className='my-3 rounded overflow-hidden'>
-      <a href={`/menus/${menus._id}`}>
+      <Link to={`/menus/${menus._id}`}>
         <Card.Img src={menus.image} variant='top' />
-      </a>
+      </Link>
       <Card.Body>
-        <a href={`/munus/${menus._id}`}>
+        <Link to={`/menus/${menus._id}`}>
           <Card.Title as='div'>
             <strong>{menus.name}</strong>
           </Card.Title>
-        </a>
+        </Link>
         <Card.Text as='div'>
           <Rating value={menus.rating} text={`${menus.numReviews} reviews`} />
         </Card.Text>
