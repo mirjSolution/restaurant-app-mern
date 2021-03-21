@@ -12,7 +12,7 @@ const HomeScreen = () => {
         {menus
           .filter((menu) => menu.category === 'Breakfast')
           .map((menu) => (
-            <Col sm={12} md={6} lg={4} xl={3}>
+            <Col key={menu._id} sm={12} md={6} lg={4} xl={3}>
               <Menus menus={menu} />
             </Col>
           ))}
@@ -22,7 +22,7 @@ const HomeScreen = () => {
         {menus
           .filter((menu) => menu.category === 'Lunch')
           .map((menu) => (
-            <Col sm={12} md={6} lg={4} xl={3}>
+            <Col key={menu._id} sm={12} md={6} lg={4} xl={3}>
               <Menus menus={menu} />
             </Col>
           ))}
@@ -32,7 +32,7 @@ const HomeScreen = () => {
         {menus
           .filter((menu) => menu.category === 'Dinner')
           .map((menu) => (
-            <Col sm={12} md={6} lg={4} xl={3}>
+            <Col key={menu._id} sm={12} md={6} lg={4} xl={3}>
               <Menus menus={menu} />
             </Col>
           ))}
