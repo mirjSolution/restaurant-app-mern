@@ -1,6 +1,5 @@
 const menus = [
   {
-    _id: '1',
     name: 'Breakfast Menu 1',
     image: '/images/breakfast1.jpg',
     description: 'Description Breakfast Menu 1',
@@ -11,7 +10,6 @@ const menus = [
     numReviews: 12,
   },
   {
-    _id: '2',
     name: 'Breakfast Menu 2',
     image: '/images/breakfast2.jpg',
     description: 'Description Breakfast Menu 2',
@@ -22,7 +20,6 @@ const menus = [
     numReviews: 8,
   },
   {
-    _id: '3',
     name: 'Lunch Menu 1',
     image: '/images/lunch1.jpg',
     description: 'Description Lunch Menu 1',
@@ -33,7 +30,6 @@ const menus = [
     numReviews: 12,
   },
   {
-    _id: '4',
     name: 'Lunch Menu 2',
     image: '/images/lunch2.jpg',
     description: 'Description Lunch Menu 2',
@@ -45,7 +41,6 @@ const menus = [
     numReviews: 12,
   },
   {
-    _id: '5',
     name: 'Dinner Menu 1',
     image: '/images/dinner1.jpg',
     description: 'Description Dinner Menu 1',
@@ -57,7 +52,6 @@ const menus = [
     numReviews: 10,
   },
   {
-    _id: '6',
     name: 'Dinner Menu 2',
     image: '/images/dinner2.jpg',
     description: 'Description Dinner Menu 2',
