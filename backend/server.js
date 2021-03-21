@@ -1,9 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
-
 import connectDB from './config/db.js';
 
-import menus from './data/menus.js';
+import menuRoutes from './routes/menuRoutes.js';
 
 dotenv.config();
 
@@ -15,14 +14,7 @@ app.get('/', (req, res) => {
   res.send('API is running...');
 });
 
-app.get('/api/menus', (req, res) => {
-  res.json(menus);
-});
-
-app.get('/api/menus/:id', (req, res) => {
-  const menu = menus.find((p) => p._id === req.params.id);
-  res.json(menu);
-});
+app.use('/api/menus', menuRoutes);
 
 const PORT = process.envPORT || 5000;
 
