@@ -10,7 +10,6 @@ router.get(
   '/',
   asyncHandler(async (req, res) => {
     const menus = await Menu.find({});
-
     res.json(menus);
   })
 );
