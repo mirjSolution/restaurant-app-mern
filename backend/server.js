@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
 
 import menuRoutes from './routes/menuRoutes.js';
@@ -15,6 +16,10 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/menus', menuRoutes);
+
+app.use(notFound);
+
+app.use(errorHandler);
 
 const PORT = process.envPORT || 5000;
 

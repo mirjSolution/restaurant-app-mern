@@ -26,7 +26,9 @@ router.get(
     if (menu) {
       res.json(menu);
     } else {
-      res.status(404).json({ message: 'Menu not found' });
+      res.status(404);
+      // formatted id but doesn't exists
+      throw new Error('Menu not found');
     }
   })
 );
