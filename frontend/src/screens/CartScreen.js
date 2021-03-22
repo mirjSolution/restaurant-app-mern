@@ -1,19 +1,10 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  Row,
-  Col,
-  ListGroup,
-  Image,
-  Form,
-  Button,
-  Card,
-  ListGroupItem,
-} from 'react-bootstrap';
+import { Row, Col, ListGroup, Image, Form, Button } from 'react-bootstrap';
 import { FaTrash } from 'react-icons/fa';
 import Message from '../components/Message';
-import { addToCart } from '../actions/cartActions';
+import { addToCart, removeFromCart } from '../actions/cartActions';
 
 const CartScreen = ({ match, location, history }) => {
   const menuParamsId = match.params.id;
@@ -31,7 +22,10 @@ const CartScreen = ({ match, location, history }) => {
     }
   }, [dispatch, menuParamsId, order]);
 
-  const removeFromCartHandler = (id) => {};
+  const removeFromCartHandler = (id) => {
+    console.log(id);
+    dispatch(removeFromCart(id));
+  };
 
   const checkoutHandler = () => {
     history.push('/login?redirect=shipping');
@@ -77,11 +71,11 @@ const CartScreen = ({ match, location, history }) => {
                     </Col>
                     <Col md={2}>
                       <Button
+                        onClick={() => removeFromCartHandler(item.menuId)}
                         type='button'
                         variant='light'
-                        onClick={() => removeFromCartHandler(item.menuId)}
                       >
-                        <FaTrash />
+                        <FaTrash color='red' />
                       </Button>
                     </Col>
                   </Row>
@@ -92,7 +86,7 @@ const CartScreen = ({ match, location, history }) => {
                   Subtotal (
                   {cartItems.reduce((acc, item) => acc + item.order, 0)}) items
                   =
-                  <span className='text-danger'>
+                  <span className='text-success'>
                     $
                     {cartItems
                       .reduce((acc, item) => acc + item.order * item.price, 0)
