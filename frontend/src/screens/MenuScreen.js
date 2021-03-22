@@ -41,9 +41,11 @@ const MenuScreen = ({ history, match }) => {
             <ListGroup variant='flush'>
               <ListGroup.Item>
                 <h3>{menu.name}</h3>
-                <Rating value={menu.rating} text={`${menu.numReviews}`} />
+                <Rating
+                  value={menu.rating}
+                  text={`${menu.numReviews} Reviews`}
+                />
               </ListGroup.Item>
-              <ListGroup.Item>Price: ${menu.price}</ListGroup.Item>
               <ListGroup.Item>Description: {menu.description}</ListGroup.Item>
             </ListGroup>
           </Col>

@@ -5,13 +5,13 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
     case CART_ADD_ITEM:
       const item = action.payload;
 
-      const existItem = state.cartItems.find((x) => x.menu === item.menu);
+      const existItem = state.cartItems.find((x) => x.menuId === item.menuId);
 
       if (existItem) {
         return {
           ...state,
           cartItems: state.cartItems.map((x) =>
-            x.menu === existItem.menu ? item : x
+            x.menuId === existItem.menuId ? item : x
           ),
         };
       } else {
