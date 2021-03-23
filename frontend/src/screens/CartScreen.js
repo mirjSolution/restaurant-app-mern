@@ -85,13 +85,10 @@ const CartScreen = ({ match, location, history }) => {
                 <h2 className='text-right'>
                   Subtotal (
                   {cartItems.reduce((acc, item) => acc + item.order, 0)}) items
-                  =
-                  <span className='text-success'>
-                    $
-                    {cartItems
-                      .reduce((acc, item) => acc + item.order * item.price, 0)
-                      .toFixed(2)}
-                  </span>
+                  = $
+                  {cartItems
+                    .reduce((acc, item) => acc + item.order * item.price, 0)
+                    .toFixed(2)}
                 </h2>
               </ListGroup.Item>
             </ListGroup>
@@ -101,7 +98,8 @@ const CartScreen = ({ match, location, history }) => {
             type='button'
             onClick={checkoutHandler}
             disabled={cartItems.length === 0}
-            className='btn btn-block btn-success'
+            variant='primary'
+            className='btn-block '
             style={{ fontSize: '22px', marginTop: '5px' }}
           >
             PROCEED TO CHECKOUT
