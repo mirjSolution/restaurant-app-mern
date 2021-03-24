@@ -29,7 +29,7 @@ const OrderScreen = ({ match }) => {
     if (!order || order._id !== orderId) {
       dispatch(getOrderDetails(orderId));
     }
-  }, [orderId, order]);
+  }, [dispatch, orderId, order]);
 
   return loading ? (
     <Loader />
