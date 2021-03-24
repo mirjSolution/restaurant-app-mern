@@ -139,14 +139,14 @@ const ProfileScreen = ({ history }) => {
                       <FaTimes color='red' />
                     )}
                   </td>
-                  <td>
+                  <td className='text-center'>
                     {order.isDelivered ? (
                       order.deliveredAt.substring(0, 10)
                     ) : (
-                      <FaTimes color='red' />
+                      <FaTimes />
                     )}
                   </td>
-                  <td>
+                  <td className='text-center'>
                     <LinkContainer to={`/order/${order._id}`}>
                       <Button className='btn-sm' variant='primary'>
                         Details
