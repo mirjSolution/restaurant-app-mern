@@ -23,7 +23,6 @@ const CartScreen = ({ match, location, history }) => {
   }, [dispatch, menuParamsId, order]);
 
   const removeFromCartHandler = (id) => {
-    console.log(id);
     dispatch(removeFromCart(id));
   };
 

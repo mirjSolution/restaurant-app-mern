@@ -94,9 +94,7 @@ const OrderScreen = ({ match }) => {
                           />
                         </Col>
                         <Col>
-                          <Link to={`/product/${item.product}`}>
-                            {item.name}
-                          </Link>
+                          <Link to={`/menus/${item.menuId}`}>{item.name}</Link>
                         </Col>
                         <Col md={4}>
                           {item.order} x ${item.price} = $
