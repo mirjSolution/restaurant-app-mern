@@ -17,3 +17,7 @@ h3 {
 .rating {
   text-align: center;
 }
+
+label.form-check-label {
+  padding: 5px;
+}
