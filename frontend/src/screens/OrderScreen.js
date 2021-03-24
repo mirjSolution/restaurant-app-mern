@@ -56,7 +56,7 @@ const OrderScreen = ({ match }) => {
         setSdkReady(true);
       }
     }
-  }, [dispatch, orderId, order]);
+  }, [dispatch, orderId, order, successPay]);
 
   const successPaymentHandler = (paymentResult) => {
     console.log(paymentResult);
@@ -104,7 +104,9 @@ const OrderScreen = ({ match }) => {
               </p>
             </ListGroup.Item>
             {order.isPaid ? (
-              <Message variant='success'>Paid on {order.paidAt}</Message>
+              <Message variant='success'>
+                Paid on {order.paidAt.substring(0, 10)}
+              </Message>
             ) : (
               <Message variant='danger'>Not Paid</Message>
             )}
