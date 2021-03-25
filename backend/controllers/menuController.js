@@ -24,4 +24,19 @@ const getMenuById = asyncHandler(async (req, res) => {
   throw new Error('Menu ot found');
 });
 
-export { getMenuById, getMenus };
+// @desc    Delete a menu
+// @route   DELETE /api/menus/:id
+// @access  Private/Admin
+const deleteMenu = asyncHandler(async (req, res) => {
+  const menu = await Menu.findById(req.params.id);
+
+  if (menu) {
+    await menu.remove();
+    res.json({ message: 'Menu removed' });
+  } else {
+    res.status(404);
+    throw new Error('Menu not found');
+  }
+});
+
+export { getMenuById, getMenus, deleteMenu };

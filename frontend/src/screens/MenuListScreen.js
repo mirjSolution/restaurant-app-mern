@@ -5,13 +5,20 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { listMenus } from '../actions/menuActions';
+import { listMenus, deleteMenu } from '../actions/menuActions';
 
-const MenuListScreen = ({ history, match }) => {
+const MenuListScreen = ({ history }) => {
   const dispatch = useDispatch();
 
   const menuList = useSelector((state) => state.menuList);
   const { loading, error, menus } = menuList;
+
+  const menuDelete = useSelector((state) => state.menuDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = menuDelete;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -22,10 +29,11 @@ const MenuListScreen = ({ history, match }) => {
     } else {
       history.push('login');
     }
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, history, userInfo, successDelete]);
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure')) {
+      dispatch(deleteMenu(id));
     }
   };
 
@@ -47,7 +55,8 @@ const MenuListScreen = ({ history, match }) => {
           </Button>
         </Col>
       </Row>
-
+      {loadingDelete && <Loader />}
+      {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (
