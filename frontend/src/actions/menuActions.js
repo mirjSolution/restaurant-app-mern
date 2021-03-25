@@ -9,6 +9,12 @@ import {
   MENU_DELETE_REQUEST,
   MENU_DELETE_SUCCESS,
   MENU_DELETE_FAIL,
+  MENU_CREATE_REQUEST,
+  MENU_CREATE_SUCCESS,
+  MENU_CREATE_FAIL,
+  MENU_UPDATE_FAIL,
+  MENU_UPDATE_SUCCESS,
+  MENU_UPDATE_REQUEST,
 } from '../constants/menuConstants';
 
 export const listMenus = () => async (dispatch) => {
@@ -77,6 +83,74 @@ export const deleteMenu = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: MENU_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const createMenu = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: MENU_CREATE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.post(`/api/menus`, {}, config);
+
+    dispatch({
+      type: MENU_CREATE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: MENU_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateProduct = (menu) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: MENU_UPDATE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(`/api/menus/${menu._id}`, menu, config);
+
+    dispatch({
+      type: MENU_UPDATE_SUCCESS,
+      payload: data,
+    });
+    dispatch({ type: MENU_DETAILS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: MENU_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

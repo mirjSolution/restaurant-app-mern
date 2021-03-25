@@ -5,6 +5,8 @@ import {
   menuListReducer,
   menuDetailsReducer,
   menuDeleteReducer,
+  menuCreateReducer,
+  menuUpdateReducer,
 } from './reducers/menuReducers';
 import { cartReducer } from './reducers/cartReducers';
 import {
@@ -27,6 +29,8 @@ const reducer = combineReducers({
   menuList: menuListReducer,
   menuDetails: menuDetailsReducer,
   menuDelete: menuDeleteReducer,
+  menuCreate: menuCreateReducer,
+  menuUpdate: menuUpdateReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,

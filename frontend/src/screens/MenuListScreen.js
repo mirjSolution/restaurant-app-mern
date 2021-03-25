@@ -5,7 +5,8 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { listMenus, deleteMenu } from '../actions/menuActions';
+import { listMenus, deleteMenu, createMenu } from '../actions/menuActions';
+import { MENU_CREATE_RESET } from '../constants/menuConstants';
 
 const MenuListScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -20,16 +21,28 @@ const MenuListScreen = ({ history }) => {
     success: successDelete,
   } = menuDelete;
 
+  const menuCreate = useSelector((state) => state.menuCreate);
+  const {
+    loading: loadingCreate,
+    error: errorCreate,
+    success: successCreate,
+    menu: createdMenu,
+  } = menuCreate;
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
-      dispatch(listMenus());
-    } else {
+    dispatch({ type: MENU_CREATE_RESET });
+    if (!userInfo.isAdmin) {
       history.push('login');
     }
-  }, [dispatch, history, userInfo, successDelete]);
+    if (successCreate) {
+      history.push(`/admin/menus/${createdMenu._id}/edit`);
+    } else {
+      dispatch(listMenus());
+    }
+  }, [dispatch, history, userInfo, successDelete, successCreate, createMenu]);
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure')) {
@@ -37,7 +50,9 @@ const MenuListScreen = ({ history }) => {
     }
   };
 
-  const createProductHandler = () => {};
+  const createProductHandler = () => {
+    dispatch(createMenu());
+  };
 
   return (
     <>
@@ -57,6 +72,8 @@ const MenuListScreen = ({ history }) => {
       </Row>
       {loadingDelete && <Loader />}
       {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+      {loadingCreate && <Loader />}
+      {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (
