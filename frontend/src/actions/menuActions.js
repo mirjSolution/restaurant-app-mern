@@ -124,12 +124,11 @@ export const createMenu = () => async (dispatch, getState) => {
   }
 };
 
-export const updateProduct = (menu) => async (dispatch, getState) => {
+export const updateMenu = (menu) => async (dispatch, getState) => {
   try {
     dispatch({
       type: MENU_UPDATE_REQUEST,
     });
-
     const {
       userLogin: { userInfo },
     } = getState();

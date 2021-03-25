@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
-import { listMenuDetails } from '../actions/menuActions';
+import { listMenuDetails, updateMenu } from '../actions/menuActions';
+import { MENU_UPDATE_RESET } from '../constants/menuConstants';
 
 const MenuEditScreen = ({ match, history }) => {
   const menuId = match.params.id;
@@ -22,21 +23,46 @@ const MenuEditScreen = ({ match, history }) => {
   const menuDetails = useSelector((state) => state.menuDetails);
   const { loading, error, menu } = menuDetails;
 
+  const menuUpdate = useSelector((state) => state.menuUpdate);
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = menuUpdate;
+
   useEffect(() => {
-    if (!menu.name || menu._id !== menuId) {
-      dispatch(listMenuDetails(menuId));
+    console.log(menu);
+    if (successUpdate) {
+      dispatch({ type: MENU_UPDATE_RESET });
+      history.push('/admin/menulist');
     } else {
-      setName(menu.name);
-      setPrice(menu.price);
-      setImage(menu.image);
-      setCategory(menu.category);
-      setOrderStock(menu.orderStock);
-      setDescription(menu.description);
+      if (!menu.name || menu._id !== menuId) {
+        dispatch(listMenuDetails(menuId));
+      } else {
+        setName(menu.name);
+        setPrice(menu.price);
+        setImage(menu.image);
+        setCategory(menu.category);
+        setOrderStock(menu.orderStock);
+        setDescription(menu.description);
+      }
     }
-  }, [dispatch, history, menuId, menu]);
+  }, [dispatch, history, menuId, menu, successUpdate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    dispatch(
+      updateMenu({
+        _id: menuId,
+        name,
+        price,
+        image,
+        category,
+        description,
+        orderStock,
+      })
+    );
   };
 
   return (
@@ -46,7 +72,8 @@ const MenuEditScreen = ({ match, history }) => {
       </Link>
       <FormContainer>
         <h1>Edit Product</h1>
-
+        {loadingUpdate && <Loader />}
+        {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
         {loading ? (
           <Loader />
         ) : error ? (
@@ -91,10 +118,10 @@ const MenuEditScreen = ({ match, history }) => {
             </Form.Group>
 
             <Form.Group controlId='orderStock'>
-              <Form.Label>Count In Stock</Form.Label>
+              <Form.Label>Order Stock</Form.Label>
               <Form.Control
                 type='number'
-                placeholder='Enter Order Stock'
+                placeholder='Enter Order Count'
                 value={orderStock}
                 onChange={(e) => setOrderStock(e.target.value)}
               ></Form.Control>

@@ -42,7 +42,7 @@ const MenuListScreen = ({ history }) => {
     } else {
       dispatch(listMenus());
     }
-  }, [dispatch, history, userInfo, successDelete, successCreate, createMenu]);
+  }, [dispatch, history, userInfo, successDelete, successCreate]);
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure')) {

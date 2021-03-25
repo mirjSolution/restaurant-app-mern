@@ -49,7 +49,7 @@ const createMenu = asyncHandler(async (req, res) => {
     user: req.user._id,
     image: '/images/sample.jpg',
     category: 'Breakfast',
-    orderStock: 0,
+    orderCount: 0,
     numReviews: 0,
     description: 'Sample description',
   });
