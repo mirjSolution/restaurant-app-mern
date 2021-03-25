@@ -6,6 +6,9 @@ import {
   MENU_DETAILS_REQUEST,
   MENU_DETAILS_SUCCESS,
   MENU_DETAILS_FAIL,
+  MENU_DELETE_REQUEST,
+  MENU_DELETE_SUCCESS,
+  MENU_DELETE_FAIL,
 } from '../constants/menuConstants';
 
 export const listMenus = () => async (dispatch) => {
@@ -42,6 +45,38 @@ export const listMenuDetails = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: MENU_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const deleteMenu = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: MENU_DELETE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.delete(`/api/menus/${id}`, config);
+
+    dispatch({
+      type: MENU_DELETE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: MENU_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
