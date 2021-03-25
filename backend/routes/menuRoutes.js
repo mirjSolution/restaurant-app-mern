@@ -4,10 +4,16 @@ import {
   getMenus,
   getMenuById,
   deleteMenu,
+  createMenu,
+  updateMenu,
 } from '../controllers/menuController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 
-router.route('/').get(getMenus);
-router.route('/:id').get(getMenuById).delete(protect, admin, deleteMenu);
+router.route('/').get(getMenus).post(protect, admin, createMenu);
+router
+  .route('/:id')
+  .get(getMenuById)
+  .delete(protect, admin, deleteMenu)
+  .put(protect, admin, updateMenu);
 
 export default router;
