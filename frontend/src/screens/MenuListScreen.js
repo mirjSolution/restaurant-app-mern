@@ -38,7 +38,7 @@ const MenuListScreen = ({ history }) => {
       history.push('login');
     }
     if (successCreate) {
-      history.push(`/admin/menus/${createdMenu._id}/edit`);
+      history.push(`/admin/menu/${createdMenu._id}/edit`);
     } else {
       dispatch(listMenus());
     }
@@ -98,7 +98,7 @@ const MenuListScreen = ({ history }) => {
                   <td>{menu.category}</td>
                   <td>${menu.price}</td>
                   <td className='text-center'>
-                    <LinkContainer to={`/admin/menus/${menu._id}/edit`}>
+                    <LinkContainer to={`/admin/menu/${menu._id}/edit`}>
                       <Button variant='light' className='btn-sm'>
                         <FaEdit color='blue' />
                       </Button>
