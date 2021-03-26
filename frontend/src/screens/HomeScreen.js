@@ -4,20 +4,23 @@ import { Col, Row } from 'react-bootstrap';
 import Menus from '../components/Menus';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import Paginate from '../components/Paginate';
 
 import { listMenus } from '../actions/menuActions';
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
 
+  const pageNumber = match.params.pageNumber || 1;
+
   const dispatch = useDispatch();
 
   const menuList = useSelector((state) => state.menuList);
-  const { loading, menus, error } = menuList;
+  const { loading, menus, error, page, pages } = menuList;
 
   useEffect(() => {
-    dispatch(listMenus(keyword));
-  }, [dispatch, keyword]);
+    dispatch(listMenus(keyword, pageNumber));
+  }, [dispatch, keyword, pageNumber]);
 
   return (
     <>
@@ -27,36 +30,19 @@ const HomeScreen = ({ match }) => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
-          <h2 className='text-center'>Breakfast</h2>
           <Row className='d-flex justify-content-center text-center'>
-            {menus
-              .filter((menu) => menu.category === 'Breakfast')
-              .map((menu) => (
-                <Col key={menu._id} sm={12} md={6} lg={4} xl={3}>
-                  <Menus menus={menu} />
-                </Col>
-              ))}
+            {menus.map((menu) => (
+              <Col key={menu._id} sm={12} md={6} lg={4} xl={3}>
+                <Menus menus={menu} />
+              </Col>
+            ))}
           </Row>
-          <h2 className='text-center'>Lunch</h2>
-          <Row className='d-flex justify-content-center text-center'>
-            {menus
-              .filter((menu) => menu.category === 'Lunch')
-              .map((menu) => (
-                <Col key={menu._id} sm={12} md={6} lg={4} xl={3}>
-                  <Menus menus={menu} />
-                </Col>
-              ))}
-          </Row>
-          <h2 className='text-center'>Dinner</h2>
-          <Row className='d-flex justify-content-center text-center'>
-            {menus
-              .filter((menu) => menu.category === 'Dinner')
-              .map((menu) => (
-                <Col key={menu._id} sm={12} md={6} lg={4} xl={3}>
-                  <Menus menus={menu} />
-                </Col>
-              ))}
-          </Row>{' '}
+
+          <Paginate
+            pages={pages}
+            page={page}
+            keyword={keyword ? keyword : ''}
+          />
         </>
       )}
     </>

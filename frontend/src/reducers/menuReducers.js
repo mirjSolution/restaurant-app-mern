@@ -27,7 +27,12 @@ export const menuListReducer = (state = { menus: [] }, action) => {
     case MENU_LIST_REQUEST:
       return { loading: true, menus: [] };
     case MENU_LIST_SUCCESS:
-      return { loading: false, menus: action.payload };
+      return {
+        loading: false,
+        menus: action.payload.menus,
+        pages: action.payload.pages,
+        page: action.payload.page,
+      };
     case MENU_LIST_FAIL:
       return { loading: false, error: action.payload };
     default:

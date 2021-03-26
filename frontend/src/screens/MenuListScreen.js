@@ -5,14 +5,16 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import Paginate from '../components/Paginate';
 import { listMenus, deleteMenu, createMenu } from '../actions/menuActions';
 import { MENU_CREATE_RESET } from '../constants/menuConstants';
 
-const MenuListScreen = ({ history }) => {
+const MenuListScreen = ({ history, match }) => {
+  const pageNumber = match.params.pageNumber || 1;
   const dispatch = useDispatch();
 
   const menuList = useSelector((state) => state.menuList);
-  const { loading, error, menus } = menuList;
+  const { loading, error, menus, pages, page } = menuList;
 
   const menuDelete = useSelector((state) => state.menuDelete);
   const {
@@ -40,16 +42,9 @@ const MenuListScreen = ({ history }) => {
     if (successCreate) {
       history.push(`/admin/menu/${createdMenu._id}/edit`);
     } else {
-      dispatch(listMenus());
+      dispatch(listMenus('', pageNumber));
     }
-  }, [
-    dispatch,
-    history,
-    userInfo,
-    successDelete,
-    successCreate,
-    createdMenu._id,
-  ]);
+  }, [dispatch, history, userInfo, successDelete, successCreate, pageNumber]);
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure')) {
@@ -122,6 +117,7 @@ const MenuListScreen = ({ history }) => {
               ))}
             </tbody>
           </Table>
+          <Paginate pages={pages} page={page} isAdmin={true} />
         </>
       )}
     </>

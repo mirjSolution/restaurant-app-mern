@@ -7,6 +7,9 @@ import Menu from '../models/menuModel.js';
 // @route   GET /api/menus
 // @access  Public
 const getMenus = asyncHandler(async (req, res) => {
+  const pageSize = 10;
+  const page = Number(req.query.pageNumber) || 1;
+
   const keyword = req.query.keyword
     ? {
         name: {
@@ -16,8 +19,20 @@ const getMenus = asyncHandler(async (req, res) => {
       }
     : {};
 
-  const menus = await Menu.find({ ...keyword });
-  res.json(menus);
+  const count = await Menu.countDocuments({ ...keyword });
+  const menus = await Menu.find({
+    ...keyword,
+  })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+  // const menus = await Menu.find({
+  //   ...keyword,
+  //   $or: [{ category: 'Breakfast' }],
+  // })
+  //   .limit(pageSize)
+  //   .skip(pageSize * (page - 1));
+
+  res.json({ menus, page, pages: Math.ceil(count / pageSize) });
 });
 
 // @desc    Fetch single menu
