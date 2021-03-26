@@ -95,4 +95,52 @@ const updateMenu = asyncHandler(async (req, res) => {
   }
 });
 
-export { getMenuById, getMenus, deleteMenu, createMenu, updateMenu };
+// @desc    Create new review
+// @route   POST /api/menu/:id/reviews
+// @access  Private
+const createMenuReview = asyncHandler(async (req, res) => {
+  const { rating, comment } = req.body;
+
+  const menu = await Menu.findById(req.params.id);
+
+  if (menu) {
+    const alreadyReviewed = menu.reviews.find(
+      (r) => r.user.toString() === req.user._id.toString()
+    );
+
+    if (alreadyReviewed) {
+      res.status(400);
+      throw new Error('Product already reviewed');
+    }
+
+    const review = {
+      name: req.user.name,
+      rating: Number(rating),
+      comment,
+      user: req.user._id,
+    };
+
+    menu.reviews.push(review);
+
+    menu.numReviews = menu.reviews.length;
+
+    menu.rating =
+      product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+      menu.reviews.length;
+
+    await menu.save();
+    res.status(201).json({ message: 'Review added' });
+  } else {
+    res.status(404);
+    throw new Error('Product not found');
+  }
+});
+
+export {
+  getMenuById,
+  getMenus,
+  deleteMenu,
+  createMenu,
+  updateMenu,
+  createMenuReview,
+};
