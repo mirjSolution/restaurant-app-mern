@@ -10,6 +10,8 @@ import userRoutes from './routes/userRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 
+import { getTopMenus } from './controllers/menuController.js';
+
 dotenv.config();
 
 connectDB();
@@ -30,6 +32,8 @@ app.use('/api/menus', menuRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/upload', uploadRoutes);
+
+app.get('/page/api/menus/top', getTopMenus);
 
 app.get('/api/config/paypal', (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)

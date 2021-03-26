@@ -7,7 +7,7 @@ import Menu from '../models/menuModel.js';
 // @route   GET /api/menus
 // @access  Public
 const getMenus = asyncHandler(async (req, res) => {
-  const pageSize = 10;
+  const pageSize = 4;
   const page = Number(req.query.pageNumber) || 1;
 
   const keyword = req.query.keyword
@@ -161,7 +161,7 @@ const createMenuReview = asyncHandler(async (req, res) => {
 });
 
 // @desc    Get top rated menus
-// @route   GET /api/menus/top
+// @route   GET /api/menus/top || GET page/api/menus/top
 // @access  Public
 const getTopMenus = asyncHandler(async (req, res) => {
   const menus = await Menu.find({}).sort({ rating: -1 }).limit(3);

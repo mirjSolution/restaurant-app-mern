@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
 import Menus from '../components/Menus';
@@ -6,10 +7,13 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import MenuCarousel from '../components/MenuCarousel';
 import Paginate from '../components/Paginate';
+import Meta from '../components/Meta';
 
 import { listMenus } from '../actions/menuActions';
 
 const HomeScreen = ({ match }) => {
+  const [windowY, setWindowY] = useState(0);
+
   const keyword = match.params.keyword;
 
   const pageNumber = match.params.pageNumber || 1;
@@ -21,11 +25,20 @@ const HomeScreen = ({ match }) => {
 
   useEffect(() => {
     dispatch(listMenus(keyword, pageNumber));
+    setWindowY(window.pageYOffset);
   }, [dispatch, keyword, pageNumber]);
 
   return (
     <>
-      {!keyword && <MenuCarousel />}
+      <Meta />
+
+      {!keyword ? (
+        <MenuCarousel />
+      ) : (
+        <Link to='/' className='btn btn-light'>
+          Go Back
+        </Link>
+      )}
       {loading ? (
         <Loader />
       ) : error ? (
@@ -44,6 +57,7 @@ const HomeScreen = ({ match }) => {
             pages={pages}
             page={page}
             keyword={keyword ? keyword : ''}
+            windowY={windowY}
           />
         </>
       )}

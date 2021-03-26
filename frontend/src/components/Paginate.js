@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Pagination } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
-const Paginate = ({ pages, page, isAdmin = false, keyword = '' }) => {
+const Paginate = ({ pages, page, isAdmin = false, keyword = '', windowY }) => {
+  useEffect(() => {
+    window.scrollTo(0, windowY);
+  }, [pages, page]);
+
   return (
     pages > 1 && (
       <div className='d-flex justify-content-center'>
