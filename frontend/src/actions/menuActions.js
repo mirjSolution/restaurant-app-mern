@@ -15,7 +15,11 @@ import {
   MENU_UPDATE_FAIL,
   MENU_UPDATE_SUCCESS,
   MENU_UPDATE_REQUEST,
+  MENU_CREATE_REVIEW_SUCCESS,
+  MENU_CREATE_REVIEW_FAIL,
+  MENU_CREATE_REVIEW_REQUEST,
 } from '../constants/menuConstants';
+import { logout } from '../actions/userAction';
 
 export const listMenus = () => async (dispatch) => {
   try {
@@ -154,6 +158,46 @@ export const updateMenu = (menu) => async (dispatch, getState) => {
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
+    });
+  }
+};
+
+export const createMenuReview = (productId, review) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: MENU_CREATE_REVIEW_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.post(`/api/menus/${productId}/reviews`, review, config);
+
+    dispatch({
+      type: MENU_CREATE_REVIEW_SUCCESS,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout());
+    }
+    dispatch({
+      type: MENU_CREATE_REVIEW_FAIL,
+      payload: message,
     });
   }
 };

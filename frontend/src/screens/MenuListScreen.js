@@ -42,7 +42,14 @@ const MenuListScreen = ({ history }) => {
     } else {
       dispatch(listMenus());
     }
-  }, [dispatch, history, userInfo, successDelete, successCreate]);
+  }, [
+    dispatch,
+    history,
+    userInfo,
+    successDelete,
+    successCreate,
+    createdMenu._id,
+  ]);
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure')) {

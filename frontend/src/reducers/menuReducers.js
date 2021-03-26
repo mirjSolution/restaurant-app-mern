@@ -16,6 +16,10 @@ import {
   MENU_UPDATE_SUCCESS,
   MENU_UPDATE_FAIL,
   MENU_UPDATE_RESET,
+  MENU_CREATE_REVIEW_REQUEST,
+  MENU_CREATE_REVIEW_SUCCESS,
+  MENU_CREATE_REVIEW_FAIL,
+  MENU_CREATE_REVIEW_RESET,
 } from '../constants/menuConstants';
 
 export const menuListReducer = (state = { menus: [] }, action) => {
@@ -88,6 +92,21 @@ export const menuUpdateReducer = (state = { menu: {} }, action) => {
       return { loading: false, error: action.payload };
     case MENU_UPDATE_RESET:
       return { menu: {} };
+    default:
+      return state;
+  }
+};
+
+export const menuReviewCreateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case MENU_CREATE_REVIEW_REQUEST:
+      return { loading: true };
+    case MENU_CREATE_REVIEW_SUCCESS:
+      return { loading: false, success: true };
+    case MENU_CREATE_REVIEW_FAIL:
+      return { loading: false, error: action.payload };
+    case MENU_CREATE_REVIEW_RESET:
+      return {};
     default:
       return state;
   }

@@ -7,8 +7,8 @@ const menus = [
     category: 'Breakfast',
     price: 9.99,
     orderCount: 10,
-    rating: 4.5,
-    numReviews: 12,
+    rating: 0,
+    numReviews: 0,
   },
   {
     name: 'Breakfast Menu 2',
@@ -18,8 +18,8 @@ const menus = [
     category: 'Breakfast',
     price: 5.99,
     orderCount: 10,
-    rating: 4.0,
-    numReviews: 8,
+    rating: 0,
+    numReviews: 0,
   },
   {
     name: 'Lunch Menu 1',
@@ -29,8 +29,8 @@ const menus = [
     category: 'Lunch',
     price: 29.99,
     orderCount: 10,
-    rating: 3,
-    numReviews: 12,
+    rating: 0,
+    numReviews: 0,
   },
   {
     name: 'Lunch Menu 2',
@@ -40,8 +40,8 @@ const menus = [
     category: 'Lunch',
     price: 12.99,
     orderCount: 8,
-    rating: 5,
-    numReviews: 12,
+    rating: 0,
+    numReviews: 0,
   },
   {
     name: 'Dinner Menu 1',
@@ -51,8 +51,8 @@ const menus = [
     category: 'Dinner',
     price: 10.99,
     orderCount: 5,
-    rating: 3.5,
-    numReviews: 10,
+    rating: 0,
+    numReviews: 0,
   },
   {
     name: 'Dinner Menu 2',
@@ -62,8 +62,8 @@ const menus = [
     category: 'Dinner',
     orderCount: 6,
     price: 11.99,
-    rating: 4,
-    numReviews: 12,
+    rating: 0,
+    numReviews: 0,
   },
 ];
 

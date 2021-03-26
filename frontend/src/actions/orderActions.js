@@ -22,7 +22,6 @@ import {
   ORDER_LIST_FAIL,
 } from '../constants/orderConstants';
 import { USER_UPDATE_PROFILE_SUCCESS } from '../constants/userConstants';
-import { logout } from './userAction';
 
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
