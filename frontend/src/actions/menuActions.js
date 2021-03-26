@@ -18,8 +18,10 @@ import {
   MENU_CREATE_REVIEW_SUCCESS,
   MENU_CREATE_REVIEW_FAIL,
   MENU_CREATE_REVIEW_REQUEST,
+  MENU_TOP_REQUEST,
+  MENU_TOP_SUCCESS,
+  MENU_TOP_FAIL,
 } from '../constants/menuConstants';
-import { logout } from '../actions/userAction';
 
 export const listMenus = (keyword = '', pageNumber = '') => async (
   dispatch
@@ -192,16 +194,33 @@ export const createMenuReview = (productId, review) => async (
       type: MENU_CREATE_REVIEW_SUCCESS,
     });
   } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
-    if (message === 'Not authorized, token failed') {
-      dispatch(logout());
-    }
     dispatch({
       type: MENU_CREATE_REVIEW_FAIL,
-      payload: message,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listTopMenus = () => async (dispatch) => {
+  try {
+    dispatch({ type: MENU_TOP_REQUEST });
+
+    const { data } = await axios.get('api/menus/top');
+
+    dispatch({
+      type: MENU_TOP_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: MENU_TOP_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };

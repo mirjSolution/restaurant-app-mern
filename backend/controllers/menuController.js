@@ -160,6 +160,15 @@ const createMenuReview = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Get top rated menus
+// @route   GET /api/menus/top
+// @access  Public
+const getTopMenus = asyncHandler(async (req, res) => {
+  const menus = await Menu.find({}).sort({ rating: -1 }).limit(3);
+
+  res.json(menus);
+});
+
 export {
   getMenuById,
   getMenus,
@@ -167,4 +176,5 @@ export {
   createMenu,
   updateMenu,
   createMenuReview,
+  getTopMenus,
 };

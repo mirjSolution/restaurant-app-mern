@@ -4,6 +4,7 @@ import { Col, Row } from 'react-bootstrap';
 import Menus from '../components/Menus';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import MenuCarousel from '../components/MenuCarousel';
 import Paginate from '../components/Paginate';
 
 import { listMenus } from '../actions/menuActions';
@@ -24,6 +25,7 @@ const HomeScreen = ({ match }) => {
 
   return (
     <>
+      {!keyword && <MenuCarousel />}
       {loading ? (
         <Loader />
       ) : error ? (

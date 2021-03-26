@@ -20,6 +20,9 @@ import {
   MENU_CREATE_REVIEW_SUCCESS,
   MENU_CREATE_REVIEW_FAIL,
   MENU_CREATE_REVIEW_RESET,
+  MENU_TOP_REQUEST,
+  MENU_TOP_SUCCESS,
+  MENU_TOP_FAIL,
 } from '../constants/menuConstants';
 
 export const menuListReducer = (state = { menus: [] }, action) => {
@@ -112,6 +115,19 @@ export const menuReviewCreateReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case MENU_CREATE_REVIEW_RESET:
       return {};
+    default:
+      return state;
+  }
+};
+
+export const menuTopRatedReducer = (state = { menus: [] }, action) => {
+  switch (action.type) {
+    case MENU_TOP_REQUEST:
+      return { loading: true, menus: [] };
+    case MENU_TOP_SUCCESS:
+      return { loading: false, menus: action.payload };
+    case MENU_TOP_FAIL:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }
