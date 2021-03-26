@@ -7,15 +7,17 @@ import Loader from '../components/Loader';
 
 import { listMenus } from '../actions/menuActions';
 
-const HomeScreen = () => {
+const HomeScreen = ({ match }) => {
+  const keyword = match.params.keyword;
+
   const dispatch = useDispatch();
 
   const menuList = useSelector((state) => state.menuList);
   const { loading, menus, error } = menuList;
 
   useEffect(() => {
-    dispatch(listMenus());
-  }, [dispatch]);
+    dispatch(listMenus(keyword));
+  }, [dispatch, keyword]);
 
   return (
     <>

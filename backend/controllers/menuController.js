@@ -7,7 +7,16 @@ import Menu from '../models/menuModel.js';
 // @route   GET /api/menus
 // @access  Public
 const getMenus = asyncHandler(async (req, res) => {
-  const menus = await Menu.find({});
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: 'i',
+        },
+      }
+    : {};
+
+  const menus = await Menu.find({ ...keyword });
   res.json(menus);
 });
 

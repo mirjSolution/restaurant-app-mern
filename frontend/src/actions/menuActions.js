@@ -21,11 +21,11 @@ import {
 } from '../constants/menuConstants';
 import { logout } from '../actions/userAction';
 
-export const listMenus = () => async (dispatch) => {
+export const listMenus = (keyword = '') => async (dispatch) => {
   try {
     dispatch({ type: MENU_LIST_REQUEST });
 
-    const { data } = await axios.get('/api/menus');
+    const { data } = await axios.get(`/api/menus?keyword=${keyword}`);
 
     dispatch({
       type: MENU_LIST_SUCCESS,
