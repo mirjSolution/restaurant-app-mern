@@ -21,3 +21,8 @@ h3 {
 label.form-check-label {
   padding: 5px;
 }
+
+.card-img-top {
+  height: 200px;
+  width: 300px;
+}

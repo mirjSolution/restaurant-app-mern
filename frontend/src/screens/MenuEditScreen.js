@@ -7,6 +7,7 @@ import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 import { listMenuDetails, updateMenu } from '../actions/menuActions';
 import { MENU_UPDATE_RESET } from '../constants/menuConstants';
+import axios from 'axios';
 
 const MenuEditScreen = ({ match, history }) => {
   const menuId = match.params.id;
@@ -17,6 +18,7 @@ const MenuEditScreen = ({ match, history }) => {
   const [category, setCategory] = useState('');
   const [orderStock, setOrderStock] = useState(0);
   const [description, setDescription] = useState('');
+  const [uploading, setUploading] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -31,7 +33,6 @@ const MenuEditScreen = ({ match, history }) => {
   } = menuUpdate;
 
   useEffect(() => {
-    console.log(menu);
     if (successUpdate) {
       dispatch({ type: MENU_UPDATE_RESET });
       history.push('/admin/menulist');
@@ -48,6 +49,33 @@ const MenuEditScreen = ({ match, history }) => {
       }
     }
   }, [dispatch, history, menuId, menu, successUpdate]);
+
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('image', file);
+    setUploading(true);
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+
+      const { data } = await axios.post(
+        `/api/upload/${menuId}`,
+        formData,
+        config
+      );
+
+      setImage(data);
+      setUploading(false);
+    } catch (error) {
+      console.error(error);
+      setUploading(false);
+    }
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -108,13 +136,13 @@ const MenuEditScreen = ({ match, history }) => {
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
               ></Form.Control>
-              {/* <Form.File
+              <Form.File
                 id='image-file'
                 label='Choose File'
                 custom
                 onChange={uploadFileHandler}
               ></Form.File>
-              {uploading && <Loader />} */}
+              {uploading && <Loader />}
             </Form.Group>
 
             <Form.Group controlId='orderStock'>

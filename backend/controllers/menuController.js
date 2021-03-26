@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 import asyncHandler from 'express-async-handler';
 import Menu from '../models/menuModel.js';
 
@@ -29,6 +31,13 @@ const getMenuById = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 const deleteMenu = asyncHandler(async (req, res) => {
   const menu = await Menu.findById(req.params.id);
+  const __dirname = path.resolve();
+
+  if (menu.image) {
+    fs.unlink(path.join(__dirname, menu.image), (err) => {
+      console.log(err);
+    });
+  }
 
   if (menu) {
     await menu.remove();
@@ -73,6 +82,10 @@ const updateMenu = asyncHandler(async (req, res) => {
     menu.image = image;
     menu.category = category;
     menu.orderStock = orderStock;
+
+    fs.unlink(menu.image, (err) => {
+      console.log(err);
+    });
 
     const updatedMenu = await menu.save();
     res.json(updatedMenu);
