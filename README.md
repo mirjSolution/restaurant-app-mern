@@ -2,17 +2,17 @@
 
 > Simple Restaurant App platform built with the MERN stack & Redux.
 
-![screenshot](/public/images/1.png?raw=true 'APP')
+![screenshot](/frontend/public/images/1.png?raw=true 'APP')
 
 ## Features
 
-- Full featured shopping cart
-- Product reviews and ratings
-- Top products carousel
-- Product pagination
-- Product search feature
+- Full featured restaurant app
+- Menu reviews and ratings
+- Top menu carousel
+- Menu pagination
+- Menu search feature
 - User profile with orders
-- Admin product management
+- Admin menu management
 - Admin user management
 - Admin Order details page
 - Mark orders as delivered option
@@ -75,5 +75,13 @@ Admin Login
 
 admin@example.com (Admin)
 123456
+
+```
+
+```
+Sample Login for PayPal Payment
+
+sb-gc435r2575838@personal.example.com
+x!zDkwX2
 
 ```
