@@ -99,13 +99,13 @@ const MenuScreen = ({ history, match }) => {
                     <Col>
                       Status:{' '}
                       <strong>
-                        {menu.orderCount > 0 ? 'Available' : 'Not Available'}
+                        {menu.orderStock > 0 ? 'Available' : 'Not Available'}
                       </strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>
 
-                {menu.orderCount > 0 && (
+                {menu.orderStock > 0 && (
                   <ListGroup.Item>
                     <Row>
                       <Col>Order Quantity</Col>
@@ -115,7 +115,7 @@ const MenuScreen = ({ history, match }) => {
                           value={order}
                           onChange={(e) => setOrder(e.target.value)}
                         >
-                          {[...Array(menu.orderCount).keys()].map((x) => (
+                          {[...Array(menu.orderStock).keys()].map((x) => (
                             <option key={x + 1} value={x + 1}>
                               {x + 1}
                             </option>
@@ -131,7 +131,7 @@ const MenuScreen = ({ history, match }) => {
                     onClick={addToCartHandler}
                     className='btn-block'
                     type='button'
-                    disabled={menu.orderCount === 0}
+                    disabled={menu.orderStock === 0}
                   >
                     Order Now
                   </Button>

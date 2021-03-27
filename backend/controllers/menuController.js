@@ -7,7 +7,7 @@ import Menu from '../models/menuModel.js';
 // @route   GET /api/menus
 // @access  Public
 const getMenus = asyncHandler(async (req, res) => {
-  const pageSize = 4;
+  const pageSize = 8;
   const page = Number(req.query.pageNumber) || 1;
 
   const keyword = req.query.keyword
@@ -82,7 +82,7 @@ const createMenu = asyncHandler(async (req, res) => {
     user: req.user._id,
     image: '/images/sample.jpg',
     category: 'Breakfast',
-    orderCount: 0,
+    orderStock: 0,
     numReviews: 0,
     description: 'Sample description',
   });
