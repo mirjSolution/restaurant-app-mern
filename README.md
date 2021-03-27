@@ -79,9 +79,8 @@ admin@example.com (Admin)
 ```
 
 ```
-Admin Login
-
 Sample Login for PayPal Payment
+
 sb-gc435r2575838@personal.example.com
 x!zDkwX2
 
