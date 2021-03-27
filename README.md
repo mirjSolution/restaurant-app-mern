@@ -77,3 +77,12 @@ admin@example.com (Admin)
 123456
 
 ```
+
+```
+Admin Login
+
+Sample Login for PayPal Payment
+sb-gc435r2575838@personal.example.com
+x!zDkwX2
+
+```
