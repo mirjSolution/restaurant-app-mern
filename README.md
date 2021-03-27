@@ -2,7 +2,7 @@
 
 > Simple Restaurant App platform built with the MERN stack & Redux.
 
-![screenshot](/public/images/1.png?raw=true 'APP')
+![screenshot](/frontend/public/images/1.png?raw=true 'APP')
 
 ## Features
 
