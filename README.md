@@ -6,13 +6,13 @@
 
 ## Features
 
-- Full featured shopping cart
-- Product reviews and ratings
-- Top products carousel
-- Product pagination
-- Product search feature
+- Full featured restaurant app
+- Menu reviews and ratings
+- Top menu carousel
+- Menu pagination
+- Menu search feature
 - User profile with orders
-- Admin product management
+- Admin menu management
 - Admin user management
 - Admin Order details page
 - Mark orders as delivered option
